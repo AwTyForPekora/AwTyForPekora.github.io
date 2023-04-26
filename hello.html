@@ -42,6 +42,7 @@
     });
   });
 </script>
+    
 </head>
 <body>
 オフライン表示テスト
@@ -49,5 +50,27 @@
   <a href="./index2.html">オクタンへ</a>
   <br>
   <img src ="./img/rebu.jpg">
+    
+    <button id="send">通知を送信する</button>
+<script>
+  // ServiceWorkerの登録
+  window.addEventListener('load', () => {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('sw.js')
+        .then(registration => console.log('registered', registration))
+        .catch(error => console.log('error', error));
+    }
+  });
+
+  // 通知の送信
+  document.getElementById('send').addEventListener('click', () => {
+    if (Notification.permission === 'granted') {
+      navigator.serviceWorker.ready.then(registration => {
+        registration.active.postMessage('hello!!!');
+      });
+    }
+  });
+</script>
 </body>
 </html>
