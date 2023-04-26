@@ -7,7 +7,7 @@
   "start_url": "./hello.html",
   "icons": [
     {
-      "src": "./192-192.png",
+      "src": "./img/192.png",
       "sizes": "192x192",
       "type": "image/png"
     }
