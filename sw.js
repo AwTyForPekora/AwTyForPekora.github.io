@@ -9,6 +9,10 @@ var resources = [
   './index2.html'
 ];
 
+
+self.addEventListener('message', function (event) {
+  self.registration.showNotification(event.data);
+});
 // キャッシュ追加
 self.addEventListener('install', function (event) {
   console.log('ServiceWorker Install');
