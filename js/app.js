@@ -1,5 +1,5 @@
 //バナーの代わりに表示するボタンを登録する
-registerInstallAppEvent(document.getElementById("InstallBtn"));
+registerInstallAppEvent(document.getElementById("installBtn"));
 
 //バナー表示をキャンセルし、代わりに表示するDOM要素を登録する関数
 //引数１：イベントを登録するHTMLElement
