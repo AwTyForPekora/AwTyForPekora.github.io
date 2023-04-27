@@ -1,3 +1,7 @@
+self.addEventListener('fetch', function(e) {
+  //空でOK
+})
+
 // バージョン定義
 var CACHE_VERSION = 'ca-v1';
 var DISP_VERSION = 'ca-d-v1';
