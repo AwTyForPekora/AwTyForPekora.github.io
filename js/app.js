@@ -1,6 +1,6 @@
     // Install PWA
     let deferredPrompt;
-    const installButton = document.querySelector('#install-button');
+    const installButton = document.querySelector('#install');
 
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
