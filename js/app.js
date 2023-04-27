@@ -1,27 +1,31 @@
-//バナーの代わりに表示するボタンを登録する
-registerInstallAppEvent(document.getElementById("installBtn"));
+    // Install PWA
+    let deferredPrompt;
+    const installButton = document.querySelector('#install-button');
 
-//バナー表示をキャンセルし、代わりに表示するDOM要素を登録する関数
-//引数１：イベントを登録するHTMLElement
-function registerInstallAppEvent(elem){
-  //インストールバナー表示条件満足時のイベントを乗っ取る
-  window.addEventListener('beforeinstallprompt', function(event){
-    console.log("beforeinstallprompt: ", event);
-    event.preventDefault(); //バナー表示をキャンセル
-    elem.promptEvent = event; //eventを保持しておく
-    elem.style.display = "block"; //要素を表示する
-    return false;
-  });
-  //インストールダイアログの表示処理
-  function installApp() {
-    if(elem.promptEvent){
-      elem.promptEvent.prompt(); //ダイアログ表示
-      elem.promptEvent.userChoice.then(function(choice){
-        elem.style.display = "none";
-        elem.promptEvent = null; //一度しか使えないため後始末
-      });//end then
-    }
-  }//end installApp
-  //ダイアログ表示を行うイベントを追加
-  elem.addEventListener("click", installApp);
-}//end registerInstallAppEvent
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+
+      // Show install button
+      installButton.style.display = 'block';
+    });
+
+    installButton.addEventListener('click', () => {
+      // Show install prompt
+      deferredPrompt.prompt();
+
+      // Wait for the user to respond to the prompt
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the install prompt.');
+        } else {
+          console.log('User dismissed the install prompt.');
+        }
+
+        // Reset deferred prompt
+        deferredPrompt = null;
+
+        // Hide install button
+        installButton.style.display = 'none';
+      });
+    });
