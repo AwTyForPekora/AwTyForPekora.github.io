@@ -5,31 +5,8 @@
     <!-- 文字コード設定&モバイル対応化 -->
     <meta charset="utf8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <script>
-        // ServiceWorkerを読み込ませる
-        window.addEventListener('load', function () {
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(function (registration) {
-                        return registration.pushManager.getSubscription().then(function (subscription) {
-                            console.log("subscription", subscription)
-                            if (subscription) {
-                                return subscription
-                            }
-                            return registration.pushManager.subscribe({
-                                userVisibleOnly: true
-                            })
-                        })
-                    }).then(function (subscription) {
-                        var endpoint = subscription.endpoint
-                        console.log("pushManager endpoint:", endpoint)
-                    }).catch(function (error) {
-                        console.log("serviceWorker error:", error)
-                    })
-            }
-        })
-    </script>
-
+        <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+        <script src="./js/script.js" defer></script>
 </head>
 <body>
 オフライン表示テスト2
