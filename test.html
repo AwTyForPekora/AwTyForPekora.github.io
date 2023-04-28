@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+      <meta charset="utf8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <!-- PWA manifest file -->
+  <link rel="manifest" href="/manifest.json">
+
+  <script>
+    // Register service worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then((reg) => {
+            console.log('Service worker registered.', reg);
+          });
+      });
+    }
+
+    // Show install button when PWA is installable
+    window.addEventListener('beforeinstallprompt', (event) => {
+      event.preventDefault();
+      const installButton = document.querySelector('#install-button');
+      installButton.style.display = 'block';
+      installButton.addEventListener('click', () => {
+        event.prompt();
+        event.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('User accepted the A2HS prompt.');
+          } else {
+            console.log('User dismissed the A2HS prompt.');
+          }
+        });
+      });
+    });
+
+    // Hide install button when PWA is already installed
+    window.addEventListener('appinstalled', (event) => {
+      const installButton = document.querySelector('#install-button');
+      installButton.style.display = 'none';
+    });
+  </script>
+</head>
+
+<body>
+  <header>
+    <h1>My PWA Site</h1>
+    <button id="install-button" style="display: none;">Install App</button>
+  </header>
+  
+  <!-- Other page content -->
+</body>
