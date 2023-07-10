@@ -1,28 +1,29 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
-    <link rel="manifest" href="/manifest.json">
-    <!-- 文字コード設定&モバイル対応化 -->
-    <meta charset="utf8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
-        <script src="./js/script.js" defer></script>
-
+  <title>年月のプルダウンリスト</title>
 </head>
 <body>
-    <header> 
-        <button id="installBtn">ホーム画面に追加する</button>
-                <script src="./js/app.js"></script>
-    </header>
-      <br>
-<main>
-    オフライン表示テスト
-  <br>
-  <a href="./index2.html">オクタン</a>
-  <br>
-  <img src ="./img/rebu.jpg">
-  <br>
-    </main>
+  <select id="yearMonthDropdown"></select>
 
+  <script>
+    // 年月の範囲を設定（例: 2020年から現在まで）
+    var startYear = 2020;
+    var endYear = new Date().getFullYear();
+    var startMonth = 1;
+    var endMonth = 12;
+
+    var dropdown = document.getElementById("yearMonthDropdown");
+
+    // 年と月のプルダウンリストを生成
+    for (var year = startYear; year <= endYear; year++) {
+      for (var month = startMonth; month <= endMonth; month++) {
+        var option = document.createElement("option");
+        option.value = year + "-" + month;
+        option.text = year + "年" + month + "月";
+        dropdown.appendChild(option);
+      }
+    }
+  </script>
 </body>
 </html>
